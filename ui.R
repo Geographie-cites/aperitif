@@ -17,7 +17,7 @@ shinyUI(fluidPage(
     tabPanel("Guide d'utilisation", 
              fluidRow(
                column(2),
-               column(7, includeMarkdown("README.md")))),
+               column(7, includeMarkdown("coat/README.md")))),
     
     # Réseau ----
     
@@ -78,7 +78,13 @@ shinyUI(fluidPage(
                  radioButtons("fluref", label = "Origine ou destination", choices = c("Origine" = "ORI", "Destination" = "DES"), selected = "ORI"),
                  radioButtons("flumod", label = "Mode de transport", choices = c("Tous modes" = "TOUT", "TC" = "TC", "VP" = "VP"), selected = "TOUT"),
                  radioButtons("fluvar", label = "Quantité", choices = c("Nombre d'individus" = "FLOW", "Cumul de distance" = "DISTTOT"), selected = "FLOW"),
-                 sliderInput("fluthr", label = "Top", min = 2, max = 100, step = 1, value = 3)
+                 sliderInput("fluthr", label = "Top", min = 2, max = 100, step = 1, value = 3),
+                 tags$br(),
+                 actionButton("vis3_descr", "Description"),
+                 tags$br(),
+                 actionButton("vis3_exemp", "Clés de lecture"),
+                 tags$br(),
+                 actionButton("vis3_donne", "Détails techniques")
                  
                )),
                column(9, leafletOutput("mapflu", height = "800px"))
@@ -108,7 +114,13 @@ shinyUI(fluidPage(
                                           "Ouvrier" = "ouvr",
                                           "Automobiliste" = "vp", 
                                           "Transporté collectivement" = "tc"),
-                              selected = "tout")
+                              selected = "tout"),
+                 tags$br(),
+                 actionButton("vis4_descr", "Description"),
+                 tags$br(),
+                 actionButton("vis4_exemp", "Clés de lecture"),
+                 tags$br(),
+                 actionButton("vis4_donne", "Détails techniques")
                )),
                column(9, leafletOutput("mappot", height = "800px"))
              )
@@ -124,7 +136,13 @@ shinyUI(fluidPage(
                                                                "Contraintes" = "Q14",
                                                                "Idéal de mobilité" = "Q16"),
                                                    selected = "",
-                                                   width = "100%"))),
+                                                   width = "100%"),
+                                       tags$br(),
+                                       actionButton("vis5_descr", "Description"),
+                                       tags$br(),
+                                       actionButton("vis5_exemp", "Clés de lecture"),
+                                       tags$br(),
+                                       actionButton("vis5_donne", "Détails techniques"))),
                       column(6, 
                              tags$h1(" "),
                              htmlOutput("textint"),
