@@ -10,6 +10,7 @@ library(shiny)
 library(shinythemes)
 library(leaflet)
 library(ggplot2)
+library(emojifont)
 library(sp)
 library(raster)
 library(cartography)
@@ -21,6 +22,7 @@ library(dplyr)
 
 # load data ----
 
+# load.emojifont('OpenSansEmoji.ttf')
 listPotentials <- readRDS(file = "data/listpotentials.Rds")
 listTimes <- readRDS(file = "data/listtimes.Rds")
 coordCom <- readRDS(file = "data/coordcom.Rds")
@@ -140,20 +142,33 @@ GetLinks <- function(tabnav, spcom, ref, mod, varsort, oneunit, thres){
 DrawCondorcet <- function(condormat){
   condorMin <- condormat - t(condormat)
   condorBin <- ifelse(condorMin > 0, 1, ifelse(condorMin < 0, -1, 0))
+  margSum <- apply(condorBin, 1, sum)
   moltenCondor <- melt(condorMin, varnames = c("ORI", "DES"), value.name = "VAL")
   moltenCondor <- moltenCondor[moltenCondor$ORI != moltenCondor$DES, ]
   moltenCondor$BIN <- ifelse(moltenCondor$VAL < 0, 0, 1)
   moltenCondor$DUEL <- factor(moltenCondor$BIN, levels = c(0, 1), labels = c("Perd", "Gagne"))
-  moltenCondor$ORI <- as.character(moltenCondor$ORI)
-  moltenCondor$DES <- as.character(moltenCondor$DES)
+  # moltenCondor$ORI <- as.character(moltenCondor$ORI)
+  # moltenCondor$DES <- as.character(moltenCondor$DES)
+  # moltenCondor$ORI <- factor(moltenCondor$ORI, levels = as.character(seq(1, 9, 1)), labels = rank(margSum))
+  # moltenCondor$DES <- factor(moltenCondor$DES, levels = as.character(seq(1, 9, 1)), labels = rank(margSum))
+  moltenCondor$ORI <- factor(moltenCondor$ORI, levels = order(margSum), labels = order(margSum))
+  moltenCondor$DES <- factor(moltenCondor$DES, levels = order(margSum), labels = order(margSum))
   
   condorPlot <- ggplot(moltenCondor) + 
     geom_point(aes(DES, ORI, color = DUEL), size = 5) +
-    scale_color_manual(values = c("dodgerblue", "firebrick")) +
+    geom_segment(data = data.frame(X = nrow(condormat) + 1, XEND = nrow(condormat) + 1,
+                                   Y = 2, YEND = nrow(condormat) - 1),
+                 aes(x = X, xend = XEND, y = Y, yend = YEND), 
+                 color = "yellow", size = 2, arrow = arrow(type="closed", ends = "both", length = unit(10, "pt"))) +
+    geom_emoji(x = nrow(condormat) + 1, y = 1, alias = "disappointed", size = 8, color = "yellow") +
+    geom_emoji(x = nrow(condormat) + 1, y = nrow(condormat), alias = "smile", size = 8, color = "yellow") +
+    geom_emoji(x = nrow(condormat) + 2, y = nrow(condormat), alias = "smile", size = 8, color = "#272B30") +
+    scale_color_manual(values = c("firebrick", "dodgerblue")) +
     theme_darklinehc + ylab("La réponse ...") + xlab("... est préférée à ...")
   
   return(condorPlot)
 }
+
 
 
 # ggplot dark theme ----
@@ -176,7 +191,8 @@ theme_darkhc <- theme_bw() +
 theme_darklinehc <- theme_bw() +
   theme(plot.background = element_rect(fill = "#272B30"),
         axis.line = element_line(color = "grey80"),
-        panel.grid.major = element_line(color = "grey80", size = 0.1),
+        # panel.grid.major = element_line(color = "grey80", size = 0.1),
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_blank(),
         panel.background = element_rect(fill = "#272B30"),
@@ -188,3 +204,4 @@ theme_darklinehc <- theme_bw() +
         legend.key =  element_blank(),
         legend.text = element_text(family = "sans-serif", color = "grey80"),
         legend.background = element_rect(fill = "#272B30"))
+

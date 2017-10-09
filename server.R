@@ -49,7 +49,7 @@ shinyServer(function(input, output, session) {
     req(input$aspques)
     modTab <- listCondor[[paste0("MOD", input$aspques)]]
     textNummod <- paste0("<strong>", substr(modTab$intitule, 1, 2), "</strong>")
-    textIntmod <- substr(modTab$intitule, 4, 100)
+    textIntmod <- substr(modTab$intitule, 4, 200)
     modTot <- paste(textNummod, textIntmod, sep = " ")
     modCollapse <- paste(modTot, collapse = "<br/>")
     return(modCollapse)

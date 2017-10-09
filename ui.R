@@ -21,7 +21,7 @@ shinyUI(fluidPage(
     
     # Réseau ----
     
-    tabPanel("Visibilité",
+    tabPanel("Desserte",
              fluidRow(
                column(3, wellPanel(
                  selectInput("viscom", 
