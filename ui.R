@@ -29,7 +29,7 @@ shinyUI(fluidPage(
                              choices = sort(coordCom$LIBGEO),
                              selected = ""),
                  radioButtons("visref", label = "Origine ou destination", choices = c("Origine" = "ORI", "Destination" = "DES"), selected = "ORI"),
-                 radioButtons("vismod", label = "Mode de transport", choices = c("TC" = "TC", "VP matin" = "VPM", "VP soir" = "VPS"), selected = "TC"),
+                 radioButtons("vismod", label = "Mode de transport", choices = c("Transport en commun" = "TC", "Voiture (matin)" = "VPM", "Voiture (soir)" = "VPS"), selected = "TC"),
                  sliderInput("visthr", label = "Seuil temporel", min = 15, max = 120, step = 15, value = 60),
                  tags$br(),
                  actionButton("vis1_descr", "Description"),
@@ -48,7 +48,7 @@ shinyUI(fluidPage(
              fluidRow(
                column(4, wellPanel(
                  radioButtons("synmod", label = "Mode de transport", 
-                              choices = c("TC" = "TC", "VP matin" = "VPM", "VP soir" = "VPS"), 
+                              choices = c("Transport en commun" = "TC", "Voiture (matin)" = "VPM", "Voiture (soir)" = "VPS"), 
                               selected = "TC"),
                  tags$br(),
                  actionButton("vis2_descr", "Description"),
@@ -76,7 +76,7 @@ shinyUI(fluidPage(
                              choices = sort(coordCom$LIBGEO),
                              selected = ""),
                  radioButtons("fluref", label = "Origine ou destination", choices = c("Origine" = "ORI", "Destination" = "DES"), selected = "ORI"),
-                 radioButtons("flumod", label = "Mode de transport", choices = c("Tous modes" = "TOUT", "TC" = "TC", "VP" = "VP"), selected = "TOUT"),
+                 radioButtons("flumod", label = "Mode de transport", choices = c("Tous modes" = "TOUT", "Transport en commun" = "TC", "Voiture" = "VP"), selected = "TOUT"),
                  radioButtons("fluvar", label = "Quantité", choices = c("Nombre d'individus" = "FLOW", "Cumul de distance" = "DISTTOT"), selected = "FLOW"),
                  sliderInput("fluthr", label = "Top", min = 2, max = 100, step = 1, value = 3),
                  tags$br(),
