@@ -235,8 +235,8 @@ shinyServer(function(input, output, session) {
     } else {
       leafletProxy("mappot") %>%
         clearImages() %>% clearShapes() %>%
-        addRasterImage(x = SelecPotential(), colors = PotentialPalette(SelecPotential()), opacity = 0.4) %>%
-        addPolygons(data = DrawContour(), stroke = TRUE, fill = FALSE, color = "#a9a9a9", weight = 1, popup = as.character(round(DrawContour()$center)))
+        addRasterImage(x = sqrt(SelecPotential()), colors = PotentialPalette(sqrt(SelecPotential())), opacity = 0.4) %>%
+        addPolygons(data = DrawContour(), stroke = TRUE, fill = FALSE, color = "#a9a9a9", weight = 1, popup = as.character(round(DrawContour()$center^2)))
     }
   })
   
@@ -260,7 +260,7 @@ shinyServer(function(input, output, session) {
   })
   
   DrawContour <- reactive({
-    potCont <- PotentialContour(ras = SelecPotential())
+    potCont <- PotentialContour(ras = sqrt(SelecPotential()))
     return(potCont)
   })
   
