@@ -10,7 +10,7 @@ Le projet [Postcar Île-de-France](http://fr.forumviesmobiles.org/projet/2017/02
 ## Citation
 
 - **pour l'application :**
-	- COMMENGES Hadrien (dir.), ADOLPHE Mary Francia, AINSA Alice, BASSOLE Simon, BEN RHAIM Mohamed Amine, BOCQUILLON Marie, DESHAYES Marion, DOUET Aurélie, FOUGEIROL Séverine, JANIN Oscar, LAMY Thomas, MARCEL Olivier, MUSSEAU Laurent, PAIRE Marianne, PICARD Floriane, POTTIER Billy, QUENON Maxime, RABINIAUX Coralie, VERDIER Cédric (2017) *Apérit-IF : explorations introductives sur les mobilités en Île-de-France*, UMR 8504 Géographie-cités.
+	- COMMENGES Hadrien (dir.), ADOLPHE Mary Francia, AINSA Alice, BASSOLE Simon, BEN RHAIM Mohamed Amine, BOCQUILLON Marie, DESHAYES Manon, DOUET Aurélie, FOUGEIROL Séverine, JANIN Oscar, LAMY Thomas, MARCEL Olivier, MUSSEAU Laurent, PAIRE Marianne, PICARD Floriane, POTTIER Billy, QUENON Maxime, RABINIAUX Coralie, VERDIER Cédric (2017) *Apérit-IF : explorations introductives sur les mobilités en Île-de-France*, UMR 8504 Géographie-cités.
 
 - **pour les données :**
 	- fond de carte : OpenStreetMap, Carto.DB, leaflet
