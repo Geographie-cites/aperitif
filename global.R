@@ -36,13 +36,15 @@ listCondor <- readRDS(file = "data/condorcet.Rds")
 
 PotentialPalette <- function(ras) {
   valRas <- c(as.matrix(ras))
-  if(min(valRas, na.rm = TRUE) > 0){
+  valRasMin <- min(valRas, na.rm = TRUE)
+  valRasMax <- max(valRas, na.rm = TRUE)
+  valRange <- c(valRasMin, valRasMax)
+  if(valRasMin >= 0 & valRasMax > 0){
     palCol <- colorRampPalette(c("grey90", "firebrick"))(100)
+  } else if (valRasMax - valRasMin < 40) {
+    palCol <- "grey90"
   } else {
-    valRasMin <- min(valRas, na.rm = TRUE)
-    valRasMax <- max(valRas, na.rm = TRUE)
-    valRange <- c(valRasMin, valRasMax)
-    seqVal <- seq(valRasMin, valRasMax, 100)
+    seqVal <- seq(valRasMin, valRasMax, 20)
     getZero <- findInterval(0, seqVal)
     palBlue <- colorRampPalette(c("navyblue", "grey90"))(getZero)
     palRed <- colorRampPalette(c("grey90", "firebrick"))(length(seqVal)-getZero)
@@ -50,6 +52,7 @@ PotentialPalette <- function(ras) {
   }
   return(palCol)
 }
+
 
 
 # Create color palette for potentials ----
