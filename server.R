@@ -216,27 +216,47 @@ shinyServer(function(input, output, session) {
     FctPal <- colorFactor(palette = colPal, levels = c("0_0", "0_1", "1_0", "1_1"), na.color = "transparent")
     leafletProxy("mapsyn") %>%
       clearShapes() %>% 
-      addPolygons(data = pomaCom, stroke = TRUE, weight = 0.5, color = "grey", fill = TRUE, fillColor = ~FctPal(eval(parse(text = varCarto))), fillOpacity = 0.4, popup = pomaCom$LIBGEO)
+      addPolygons(data = pomaCom, stroke = TRUE, weight = 0.5, color = "grey", fill = TRUE, fillColor = ~FctPal(eval(parse(text = varCarto))), fillOpacity = 0.4, label = pomaCom$LIBGEO)
   })
   
   observe({
     topDes <- GetTopLinks()
     leafletProxy("mapflu") %>%
       clearShapes() %>%
-      addPolygons(data = topDes$POLYG, popup = topDes$POLYG$LIBGEO, stroke = TRUE, weight = 1, color = "grey35", fill = TRUE, fillColor = "ghostwhite", fillOpacity = 0.3) %>% 
+      addPolygons(data = topDes$POLYG, label = topDes$POLYG$LIBGEO, stroke = TRUE, weight = 1, color = "grey35", fill = TRUE, fillColor = "ghostwhite", fillOpacity = 0.3) %>% 
       addPolylines(data = topDes$LINES, color = "firebrick", opacity = 0.8, weight = 1.5, stroke = TRUE)
   })
   
   observe({
     if(input$pottyp == "dif"){
       leafletProxy("mappot") %>%
-        clearImages() %>% clearShapes() %>%
-        addRasterImage(x = SelecPotential(), colors = PotentialPalette(SelecPotential()), opacity = 0.4)
+        clearImages() %>% clearShapes() %>% clearControls() %>% 
+        addRasterImage(x = SelecPotential(), colors = PotentialPalette(SelecPotential()), opacity = 0.4) %>% 
+        addLegend(position = "topright", 
+                  colors = c("#B22222", "#E5E5E5", "#000080"), 
+                  labels = c("Surplus d'emplois (déficit d'actifs)", 
+                             "Équilibre actifs-emplois",
+                             "Surplus d'actifs (déficit d'emplois)"))
+    } else if(input$pottyp == "ori"){
+      leafletProxy("mappot") %>%
+        clearImages() %>% clearShapes() %>% clearControls() %>% 
+        addRasterImage(x = sqrt(SelecPotential()), colors = PotentialPalette(sqrt(SelecPotential())), opacity = 0.4) %>%
+        addPolygons(data = DrawContour(), stroke = TRUE, fill = FALSE, color = "#a9a9a9", weight = 1, 
+                    label = paste(as.character(round(DrawContour()$center^2)), "actifs")) %>% 
+        addLegend(position = "topright", 
+                  colors = c("#B22222", "#E5E5E5"),  
+                  labels = c("Forte densité d'actifs", 
+                             "Faible densité d'actifs"))
     } else {
       leafletProxy("mappot") %>%
-        clearImages() %>% clearShapes() %>%
+        clearImages() %>% clearShapes() %>% clearControls() %>% 
         addRasterImage(x = sqrt(SelecPotential()), colors = PotentialPalette(sqrt(SelecPotential())), opacity = 0.4) %>%
-        addPolygons(data = DrawContour(), stroke = TRUE, fill = FALSE, color = "#a9a9a9", weight = 1, popup = as.character(round(DrawContour()$center^2)))
+        addPolygons(data = DrawContour(), stroke = TRUE, fill = FALSE, color = "#a9a9a9", weight = 1, 
+                    label = paste(as.character(round(DrawContour()$center^2)), "emplois")) %>% 
+        addLegend(position = "topright", 
+                  colors = c("#B22222", "#E5E5E5"),  
+                  labels = c("Forte densité d'emplois (destination)", 
+                             "Faible densité d'emplois (destination)"))
     }
   })
   

@@ -22,7 +22,7 @@ Le projet [Postcar Île-de-France](http://fr.forumviesmobiles.org/projet/2017/02
 
 ## Accès à l'application et au code
 
-- Accès à l'application Apérit-IF sur le serveur de l'UMR 8504 Géographie-cités : XXX
+- Accès à l'application Apérit-IF sur le serveur de l'UMR 8504 Géographie-cités : http://shiny.parisgeo.cnrs.fr/aperitif
 - Accès à l'application Apérit-IF sur le serveur du TGIR Huma-Num : https://analytics.huma-num.fr/Hadrien.Commenges/aperitif
 - Accès au code de l'application sur le dépot Github : https://github.com/Geographie-cites/aperitif
 
@@ -32,4 +32,4 @@ Le projet [Postcar Île-de-France](http://fr.forumviesmobiles.org/projet/2017/02
 - Sur le calcul de l'indice de mobilité potentielle (onglet **Vitesses**), voir Martens K. (2015) "Accessibility and potential mobility as a guide for policy action", *Transportation Research Record*, nº2499, pp.18-24.
 - Sur le calcul de l'accessibilité gravitaire (onglet **Bassins**), voir Commenges H., Giraud T., Lambert N. (2016) "ESPON FIT : Functional indicators for spatial-aware policy-making", *Cartographica*, vol.51, nº3, pp.127-136.
 - Pour une application des méthodes d'accessibilité gravitaire sur la France, voir le rapport de l'Observatoire des Territoires intitulé [Emploi et territoires](http://www.cget.gouv.fr/ressources/publications/emploi-et-territoires-rapport-de-l-observatoire-des-territoires-2016).
-- Sur les outils utilisés : le langage **R**, les packages **sp**, **SpatialPosition**, **shiny** et **leaflet**.
+
